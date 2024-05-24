@@ -1,3 +1,23 @@
+1) copied code from knative/docs (https://github.com/knative/docs code-samples/serving/hello-world/helloworld-go)
+
+2) create helm chart
+`helm create .`
+   (reverse: `rm -r templates/ values.yaml .helmignore Chart.yaml`)
+
+3) tweaked files Chart.yaml and values.yaml a little
+
+4) docker build & push (to my docker hub registry space thingy)
+```shell
+docker buildx build --platform linux/amd64,linux/arm64 --push -t tjenwellens/helloworld-go:latest --progress=plain .
+```
+
+5) then I could do a simple helm install to get it on the cluster (assuming you have kubectl stuff linked up)
+```shell
+helm install helloworld-go .
+```
+
+old readme below:
+
 # Hello World - Go
 
 This guide describes the steps required to to create the `helloworld-go` sample app
